@@ -12,12 +12,15 @@
     "gulp": "^3.9.1"
   },
   "dependencies": {
+    "ejs": "^2.4.1",
     "express": "^4.13.4",
     "gulp": "^3.9.1",
     "gulp-browserify": "^0.5.1",
     "gulp-concat": "^2.6.0",
     "gulp-plumber": "^1.1.0",
-    "reactify": "^1.1.1",
-    "ejs": "^2.4.1"
+    "locallydb": "0.0.9",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "reactify": "^1.1.1"
   }
 }
