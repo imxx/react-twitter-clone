@@ -30,3 +30,14 @@ passport.serializeUser(function(user, done){
 passport.deserealizeUser(function(cid, done){
 	done(null, users.get(cid));
 });
+
+
+var router = require("express").Router();
+router.use(require("cookie-parser")());
+router.use(require("express-session")({
+	secret: "asdfjk12345",
+	resave: false,
+	saveUninitialized: true
+}));
+router.use(passport.initialize());
+router.use(passport.session());
