@@ -6,6 +6,7 @@ express()
 	.use(express.static("./public"))
 	.use(express.static("./bower_components"))
 	.use(login.routes)
+	.use(require("./chirps"))
 	.get("*", function(req, res){
 		res.render("index");
 	})
