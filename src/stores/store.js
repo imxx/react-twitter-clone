@@ -36,6 +36,9 @@ var storeMethods = {
         }else{
             this.actions[actionType] = [actionFn];
         }
+    },
+    all: function(){
+        return this._data;
     }
 };
 
@@ -53,6 +56,7 @@ exports.extend = function(methods){
         if(store.actions[action.actionType]){
             store.actions[action.actionType].forEach(function(fn){
                 fn.call(store, action.data);
+                store.emitChange();
             });
         }
     });

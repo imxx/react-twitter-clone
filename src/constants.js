@@ -1,7 +1,7 @@
 module.exports = {
     CHIRP: "CHIRP",
     CHIRPED: "CHIRPED",
-    GOT_SHIRPS: "GOT_SHIRPS",
+    GOT_CHIRPS: "GOT_CHIRPS",
 
     GOT_CURRENT_USER: "GOT_CURRENT_USER",
     GOT_USERS: "GOT_USERS",

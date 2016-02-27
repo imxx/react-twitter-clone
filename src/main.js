@@ -29,6 +29,8 @@ ReactDOM.render(
     document.getElementById("app"));
 
 
+API.fetchChirps();
+
 /*
 var routes = (
     <Route path="/" component={APP} >
