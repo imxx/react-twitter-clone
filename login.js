@@ -120,6 +120,12 @@ router.post('/api/unfollow/:id', function (req, res) {
     res.json(makeUserSafe(req.user));
 });
 
+
+router.get("/api/users", function(req, res){
+    return res.json(users.toArray(u).map(makeUserSafe(u)));
+});
+
+
 exports.routes = router;
 exports.required = loginRequired;
 exports.safe = makeUserSafe;

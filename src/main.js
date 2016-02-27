@@ -31,6 +31,7 @@ ReactDOM.render(
 
 
 API.fetchChirps();
+API.fetchUsers();
 
 /*
 var routes = (

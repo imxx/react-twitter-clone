@@ -11,6 +11,10 @@ var API = module.exports = {
         });
     },
 
+    fetchUsers: function(){
+        get("/api/users").then(actions.gotUsers.bind(actions));
+    },
+
     saveChirp: function(text){
         text: text.trim();
         if(text === '') return;
