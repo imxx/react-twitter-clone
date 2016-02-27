@@ -7,8 +7,10 @@ express()
 	.use(express.static("./bower_components"))
 	.use(login.routes)
 	.use(require("./chirps"))
-	.get("*", function(req, res){
-		res.render("index");
+	.get("*", login.required, function(req, res){
+		res.render("index", {
+            user: login.safe(req.user)
+        });
 	})
 	.listen(3000);
 

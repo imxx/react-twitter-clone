@@ -1,4 +1,7 @@
 var actions = require("./actions");
+var constants = require("./constants");
+var dispatcher = require("./dispatcher");
+
 
 var API = module.exports = {
 
@@ -6,7 +9,13 @@ var API = module.exports = {
         get("/api/chirps").then(function(chirps){
             actions.gotChirps(chirps);
         });
-    }
+    },
+
+    saveChirp: function(text){
+        text: text.trim();
+        if(text === '') return;
+        post("/api/chirps", { text: text }).then(actions.chirped.bind(actions));
+    } 
 
 };
 
@@ -17,3 +26,27 @@ function get(url){
         return res.json();
     });
 }
+
+function post(url, body){
+    return fetch(url, {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify(body || {}),
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        }
+    }).then(function(res){
+        return res.json();
+    });
+}
+
+dispatcher.register(function(action){
+    switch(action.actionType){
+        case constants.CHIRP:
+            API.saveChirp(action.data);
+            break;
+        default:
+            break;
+    }
+});
