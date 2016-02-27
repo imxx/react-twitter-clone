@@ -1,1 +1,1 @@
-var actions = require("./acitons");
+var actions = require("./actions");

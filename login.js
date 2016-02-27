@@ -1,6 +1,7 @@
 var passport = require("passport");
 var LocalStrategy = require("passport-local");
-var LocallyDB = require("localldb");
+var LocallyDB = require("locallydb");
+var bodyParser = require('body-parser');
 
 
 var db = new LocallyDB("./data");
@@ -26,12 +27,14 @@ passport.serializeUser(function(user, done){
 	done(null, user.cid);
 });
 
-passport.deserealizeUser(function(cid, done){
+passport.deserializeUser(function(cid, done){
 	done(null, users.get(cid));
 });
 
 
 var router = require("express").Router();
+router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json());
 router.use(require("cookie-parser")());
 router.use(require("express-session")({
 	secret: "asdfjk12345",
@@ -76,7 +79,7 @@ router.get('/logout', function (req, res) {
 
 function loginRequired (req, res, next) {
     if (req.isAuthenticated()) {
-        next(); 
+        next();
     } else {
         res.redirect('/login');
     }
