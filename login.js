@@ -54,7 +54,8 @@ router.post("/signup", function(req, res){
 			fullname: req.body.fullname,
 			email: req.body.email,
 			username: req.body.username,
-			passwordhash: hash(req.body.password)
+			passwordhash: hash(req.body.password),
+            following: []
 		};
 		var userId = users.insert(user);
 
@@ -96,33 +97,28 @@ function makeUserSafe (user) {
     return safeUser;
 }
 
-router.get('/api/users', function (req, res) {
-    res.json(users.toArray().map(makeUserSafe));
+
+router.get("/api/users", function(req, res){
+    return res.json(users.toArray().map(function(u){return makeUserSafe(u)}));
 });
 
-router.post('/api/follow/:id', function (req, res) {
+router.post("/api/follow/:id", function(req, res){
     var id = parseInt(req.params.id, 10);
-
-    if (req.user.following.indexOf(id) < 0) {
+    if(req.user.following.indexOf(id) < 0){
         req.user.following.push(id);
         users.update(req.user.cid, req.user);
     }
     res.json(makeUserSafe(req.user));
 });
 
-router.post('/api/unfollow/:id', function (req, res) {
+router.post("/api/unfollow/:id", function(req, res){
     var id = parseInt(req.params.id, 10);
-    var pos = req.user.following.indexOf(id);
-    if (pos > -1) {
+    var pos = user.following.indexOf(id);
+    if(pos > -1){
         req.user.following.splice(pos, 1);
         users.update(req.user.cid, req.user);
     }
     res.json(makeUserSafe(req.user));
-});
-
-
-router.get("/api/users", function(req, res){
-    return res.json(users.toArray(u).map(makeUserSafe(u)));
 });
 
 

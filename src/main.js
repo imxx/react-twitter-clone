@@ -15,13 +15,17 @@ var ChirpStore = require("./stores/chirps");
 
 var App = require("./components/App");
 var Home = require("./components/Home");
+var UserList = require("./components/UserList");
 
+API.fetchUsers();
+API.fetchChirps();
 
 
 var routes = (
     <Route path="/" component={App}>
         <IndexRoute component={Home} />
-        <Route path="/users/:id" component={Home} />
+        <Route path="/users" component={UserList} />
+        <Route path="/user/:id" component={Home} />
     </Route>
 );
 
@@ -30,8 +34,6 @@ ReactDOM.render(
     document.getElementById("app"));
 
 
-API.fetchChirps();
-API.fetchUsers();
 
 /*
 var routes = (
