@@ -21,6 +21,7 @@ var Home = require("./components/Home");
 var routes = (
     <Route path="/" component={App}>
         <IndexRoute component={Home} />
+        <Route path="/users/:id" component={Home} />
     </Route>
 );
 
