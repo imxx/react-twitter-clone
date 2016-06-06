@@ -4,9 +4,7 @@ var ReactRouter = require("react-router");
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 var IndexRoute = ReactRouter.IndexRoute;
-var useRouterHistory = require("react-router/lib/useRouterHistory");
-var createHashHistory = require("history/lib/createHashHistory");
-var appHistory = useRouterHistory(createHashHistory)({ queryKey: false });
+var browserHistory = require("react-router/lib/browserHistory");
 
 
 
@@ -16,21 +14,25 @@ var ChirpStore = require("./stores/chirps");
 var App = require("./components/App");
 var Home = require("./components/Home");
 var UserList = require("./components/UserList");
+var UserProfile = require("./components/UserProfile");
+
 
 API.fetchUsers();
 API.fetchChirps();
 
 
 var routes = (
-    <Route path="/" component={App}>
+    <Route component={App}>
         <IndexRoute component={Home} />
+        <Route path="/" component={Home} />
+        <Route path="/home" component={Home} />
         <Route path="/users" component={UserList} />
-        <Route path="/user/:id" component={Home} />
+        <Route path="/user/:id" component={UserProfile} />
     </Route>
 );
 
 ReactDOM.render(
-    <Router history={appHistory} routes={routes} />,
+    <Router history={browserHistory} routes={routes} />,
     document.getElementById("app"));
 
 

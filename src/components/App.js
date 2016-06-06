@@ -1,4 +1,5 @@
 var React = require("react");
+var Navigation = require("./Navigation");
 
 var App = React.createClass({
     render: function(){
@@ -10,7 +11,7 @@ var App = React.createClass({
 
                 <div className="row">
                     <div className="three columns">
-                        Navigation
+                        <Navigation />
                     </div>
 
                     <div className="nine columns">
@@ -24,5 +25,3 @@ var App = React.createClass({
 
 
 module.exports = App;
-
-//{React.cloneElement(this.props.children, this.state )}
